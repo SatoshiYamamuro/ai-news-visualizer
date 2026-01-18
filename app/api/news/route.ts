@@ -98,13 +98,17 @@ ${JSON.stringify(newsData, null, 2)}
 
 ## 作成物
 
-### 1. summary（日本語要約 300-400文字）
+### 1. titleJa（日本語タイトル）
+- 英語のタイトルを自然な日本語に翻訳
+- ニュースの核心を捉えた分かりやすいタイトル
+
+### 2. summary（日本語要約 300-400文字）
 - 何が発表されたか（具体的な技術・製品名）
 - なぜ業界にとって重要なのか
 - 誰がどのような影響を受けるか
 - 今後の展開予測
 
-### 2. visualHtml（Canva品質のインフォグラフィック）
+### 3. visualHtml（Canva品質のインフォグラフィック）
 
 ## 🎨 デザイン哲学（絶対遵守）
 
@@ -114,6 +118,8 @@ ${JSON.stringify(newsData, null, 2)}
 ❌ 均一なフォントサイズ
 ❌ 余白のない詰め込みデザイン
 ❌ 単色の平坦な背景
+❌❌❌ 白背景に白文字（絶対禁止！読めなくなる）
+❌❌❌ 薄い背景に薄い文字（コントラスト不足は致命的）
 
 ### 必須要素
 ✅ グラデーション背景（bg-gradient-to-br from-X to-Y）
@@ -121,7 +127,12 @@ ${JSON.stringify(newsData, null, 2)}
 ✅ 影による奥行き（shadow-lg, shadow-xl）
 ✅ 情報の階層化（ヒーロー数字は text-5xl font-black）
 ✅ 十分な余白（p-6以上、gap-4以上）
-✅ グラスモーフィズム効果（bg-white/80 backdrop-blur-sm）
+✅ 高コントラスト配色（暗い背景→白文字、明るい背景→濃い文字）
+
+### ⚠️ 色のコントラスト規則（必ず守ること）
+- 濃い背景（slate-800, indigo-600等）→ 白文字（text-white）
+- 明るい背景（slate-50, white等）→ 濃い文字（text-slate-800, text-gray-900）
+- 絶対に背景と文字が同系色にならないこと！
 
 ## 📐 テンプレート集（これを基に創造的にアレンジせよ）
 
@@ -172,30 +183,30 @@ ${JSON.stringify(newsData, null, 2)}
 </div>
 
 ### 【テンプレート2: ヒーロー数値型】資金調達・成長・統計用
-<div class="bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 rounded-3xl p-8 text-white relative overflow-hidden">
+<div class="bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 rounded-3xl p-8 relative overflow-hidden">
   <!-- 装飾 -->
-  <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-  <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+  <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+  <div class="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
   
-  <!-- メイン数値 -->
+  <!-- メイン数値（白文字で高コントラスト）-->
   <div class="relative text-center mb-8">
-    <div class="text-7xl font-black tracking-tight mb-2">$500M</div>
-    <div class="text-xl text-white/80">資金調達額</div>
+    <div class="text-7xl font-black tracking-tight mb-2 text-white">$500M</div>
+    <div class="text-xl text-indigo-200">資金調達額</div>
   </div>
   
-  <!-- サブ指標 -->
+  <!-- サブ指標（濃い背景に白文字）-->
   <div class="relative grid grid-cols-3 gap-4">
-    <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
-      <div class="text-3xl font-bold">10x</div>
-      <div class="text-sm text-white/70">成長率</div>
+    <div class="bg-indigo-800/80 rounded-2xl p-4 text-center">
+      <div class="text-3xl font-bold text-white">10x</div>
+      <div class="text-sm text-indigo-200">成長率</div>
     </div>
-    <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
-      <div class="text-3xl font-bold">50+</div>
-      <div class="text-sm text-white/70">パートナー</div>
+    <div class="bg-purple-800/80 rounded-2xl p-4 text-center">
+      <div class="text-3xl font-bold text-white">50+</div>
+      <div class="text-sm text-purple-200">パートナー</div>
     </div>
-    <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
-      <div class="text-3xl font-bold">1M</div>
-      <div class="text-sm text-white/70">ユーザー</div>
+    <div class="bg-slate-800/80 rounded-2xl p-4 text-center">
+      <div class="text-3xl font-bold text-white">1M</div>
+      <div class="text-sm text-slate-300">ユーザー</div>
     </div>
   </div>
 </div>
@@ -298,36 +309,36 @@ ${JSON.stringify(newsData, null, 2)}
 </div>
 
 ### 【テンプレート5: 対立構造型】訴訟・競争・比較用
-<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-6 text-white">
-  <h4 class="text-center text-lg font-bold mb-6 flex items-center justify-center gap-2">
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-6">
+  <h4 class="text-center text-lg font-bold mb-6 flex items-center justify-center gap-2 text-white">
     <span>⚔️</span> 対立構造
   </h4>
   
   <div class="flex items-center gap-4">
-    <!-- 左陣営 -->
-    <div class="flex-1 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-5 text-center">
+    <!-- 左陣営（濃い背景に白文字）-->
+    <div class="flex-1 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-5 text-center">
       <div class="text-4xl mb-3">🏢</div>
-      <div class="text-xl font-bold">Company A</div>
+      <div class="text-xl font-bold text-white">企業A</div>
       <div class="text-sm text-blue-200 mt-2">原告側</div>
     </div>
     
-    <!-- VS -->
+    <!-- VS（赤背景に白文字）-->
     <div class="flex-shrink-0">
-      <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center text-2xl font-black shadow-lg shadow-red-500/30">VS</div>
+      <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-orange-600 rounded-full flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-red-500/30">VS</div>
     </div>
     
-    <!-- 右陣営 -->
-    <div class="flex-1 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl p-5 text-center">
+    <!-- 右陣営（濃い背景に白文字）-->
+    <div class="flex-1 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl p-5 text-center">
       <div class="text-4xl mb-3">🏢</div>
-      <div class="text-xl font-bold">Company B</div>
+      <div class="text-xl font-bold text-white">企業B</div>
       <div class="text-sm text-purple-200 mt-2">被告側</div>
     </div>
   </div>
   
-  <!-- 争点 -->
-  <div class="mt-4 bg-white/10 backdrop-blur-sm rounded-2xl p-4 text-center">
+  <!-- 争点（濃い背景に明るい文字）-->
+  <div class="mt-4 bg-slate-700 rounded-2xl p-4 text-center">
     <div class="text-sm text-slate-300">争点</div>
-    <div class="font-bold mt-1">知的財産権の侵害</div>
+    <div class="font-bold mt-1 text-white">知的財産権の侵害</div>
   </div>
 </div>
 
@@ -337,8 +348,9 @@ ${JSON.stringify(newsData, null, 2)}
   "results": [
     {
       "index": 1,
+      "titleJa": "日本語に翻訳したニュースタイトル",
       "summary": "日本語の詳細要約（300-400文字）",
-      "visualHtml": "上記テンプレートを参考に、ニュース内容に最適化した美しいHTML"
+      "visualHtml": "上記テンプレートを参考に、高コントラストで見やすい美しいHTML"
     }
   ]
 }
@@ -362,7 +374,7 @@ ${JSON.stringify(newsData, null, 2)}
     const finalNews = newsData.map((news, index) => {
       const aiResult = aiResults.results?.find((r: { index: number }) => r.index === index + 1) || {};
       return {
-        title: news.title,
+        title: aiResult.titleJa || news.title, // 日本語タイトルを優先
         publishedAt: news.publishedAt,
         source: news.source.replace(" AI", ""),
         summary: aiResult.summary || "要約を生成できませんでした",
