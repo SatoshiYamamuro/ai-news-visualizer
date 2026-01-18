@@ -311,3 +311,50 @@ html {
 ::selection {
   background: rgba(102, 126, 234, 0.3);
 }
+
+/* ============================================
+   🛡️ Contrast Failsafe - 図解の視認性保証
+   ============================================ */
+
+/* 図解コンテナ内のデフォルト文字色を濃くする */
+[dangerouslySetInnerHTML] > div,
+.visual-container {
+  color: #1e293b; /* slate-800 - デフォルトで濃い文字 */
+}
+
+/* 濃い背景クラスには白文字を強制 */
+[class*="bg-slate-800"],
+[class*="bg-slate-900"],
+[class*="bg-gray-800"],
+[class*="bg-gray-900"],
+[class*="bg-indigo-600"],
+[class*="bg-indigo-700"],
+[class*="bg-indigo-800"],
+[class*="bg-indigo-900"],
+[class*="bg-purple-600"],
+[class*="bg-purple-700"],
+[class*="bg-purple-800"],
+[class*="bg-purple-900"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"],
+[class*="bg-blue-800"],
+[class*="bg-emerald-600"],
+[class*="bg-emerald-700"],
+[class*="bg-red-600"],
+[class*="bg-red-700"] {
+  color: white;
+}
+
+/* 薄い背景クラスには濃い文字を強制 */
+[class*="bg-white"],
+[class*="bg-slate-50"],
+[class*="bg-slate-100"],
+[class*="bg-gray-50"],
+[class*="bg-gray-100"],
+[class*="bg-blue-50"],
+[class*="bg-indigo-50"],
+[class*="bg-purple-50"],
+[class*="bg-emerald-50"],
+[class*="bg-red-50"] {
+  color: #1e293b; /* slate-800 */
+}

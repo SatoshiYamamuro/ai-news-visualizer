@@ -129,54 +129,80 @@ ${JSON.stringify(newsData, null, 2)}
 ✅ 十分な余白（p-6以上、gap-4以上）
 ✅ 高コントラスト配色（暗い背景→白文字、明るい背景→濃い文字）
 
-### ⚠️ 色のコントラスト規則（必ず守ること）
-- 濃い背景（slate-800, indigo-600等）→ 白文字（text-white）
-- 明るい背景（slate-50, white等）→ 濃い文字（text-slate-800, text-gray-900）
-- 絶対に背景と文字が同系色にならないこと！
+### ⚠️ 配色ルール（これ以外の組み合わせは禁止）
+
+【許可される配色パターン - 必ずこの中から選ぶこと】
+
+■ パターンA: ダーク背景（高級感・重厚感）
+背景: bg-slate-800, bg-slate-900, bg-gray-800, bg-gray-900
+文字: text-white（メイン）, text-slate-200, text-gray-200（サブ）
+
+■ パターンB: カラー背景（アクセント・強調）
+背景: bg-blue-600, bg-indigo-600, bg-purple-600, bg-emerald-600, bg-rose-600
+文字: text-white（必須）
+
+■ パターンC: ライト背景（清潔感・読みやすさ）
+背景: bg-white, bg-slate-50, bg-gray-50, bg-slate-100
+文字: text-slate-800, text-slate-900, text-gray-800, text-gray-900
+
+■ パターンD: パステル背景（柔らかさ）
+背景: bg-blue-50, bg-indigo-50, bg-purple-50, bg-emerald-50
+文字: text-blue-900, text-indigo-900, text-purple-900, text-emerald-900
+
+■ パターンE: グラデーション背景
+背景: bg-gradient-to-r from-blue-600 to-indigo-600（濃い色同士）
+文字: text-white（必須）
+
+背景: bg-gradient-to-br from-slate-50 to-blue-50（薄い色同士）
+文字: text-slate-800, text-slate-900
+
+【絶対禁止の組み合わせ】
+❌ bg-white + text-white
+❌ bg-slate-50 + text-slate-100（薄い×薄い）
+❌ bg-slate-800 + text-slate-700（濃い×濃い）
+❌ bg-blue-500 + text-blue-600（同系色）
+❌ 背景と文字の明度が近い組み合わせすべて
 
 ## 📐 テンプレート集（これを基に創造的にアレンジせよ）
 
 ### 【テンプレート1: 技術アーキテクチャ型】新技術・システム解説用
 <div class="relative">
-  <!-- ヘッダー -->
-  <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 rounded-t-3xl p-6 text-white">
+  <!-- ヘッダー（濃いグラデーション→白文字）-->
+  <div class="bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-600 rounded-t-3xl p-6">
     <div class="flex items-center gap-3 mb-2">
       <span class="text-3xl">🏗️</span>
-      <h4 class="text-xl font-bold">システムアーキテクチャ</h4>
+      <h4 class="text-xl font-bold text-white">システムアーキテクチャ</h4>
     </div>
-    <p class="text-white/80 text-sm">新技術の構造を視覚化</p>
+    <p class="text-indigo-100 text-sm">新技術の構造を視覚化</p>
   </div>
   
-  <!-- メインコンテンツ -->
-  <div class="bg-gradient-to-b from-slate-50 to-white p-6 rounded-b-3xl">
-    <!-- レイヤー構造 -->
+  <!-- メインコンテンツ（薄い背景→濃い文字）-->
+  <div class="bg-slate-100 p-6 rounded-b-3xl">
     <div class="space-y-3">
-      <!-- Layer 1 -->
-      <div class="bg-gradient-to-r from-blue-500 to-cyan-400 text-white p-4 rounded-2xl shadow-lg shadow-blue-500/20 text-center">
-        <div class="font-bold text-lg">🖥️ ユーザーインターフェース</div>
-        <div class="text-sm text-white/80">自然言語での対話</div>
+      <!-- Layer 1（濃い青→白文字）-->
+      <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-center">
+        <div class="font-bold text-lg text-white">🖥️ ユーザーインターフェース</div>
+        <div class="text-sm text-blue-100">自然言語での対話</div>
       </div>
       
-      <!-- 接続線 -->
       <div class="flex justify-center">
-        <div class="w-1 h-6 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full"></div>
+        <div class="w-1 h-6 bg-purple-400 rounded-full"></div>
       </div>
       
-      <!-- Layer 2 -->
-      <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-2xl shadow-lg shadow-purple-500/20 text-center">
-        <div class="font-bold text-lg">🧠 AIエンジン</div>
-        <div class="text-sm text-white/80">推論・生成処理</div>
+      <!-- Layer 2（濃い紫→白文字）-->
+      <div class="bg-purple-600 p-4 rounded-2xl shadow-lg text-center">
+        <div class="font-bold text-lg text-white">🧠 AIエンジン</div>
+        <div class="text-sm text-purple-100">推論・生成処理</div>
       </div>
       
-      <!-- 接続線 -->
       <div class="flex justify-center">
-        <div class="w-1 h-6 bg-gradient-to-b from-pink-500 to-emerald-500 rounded-full"></div>
+        <div class="w-1 h-6 bg-emerald-400 rounded-full"></div>
       </div>
       
-      <!-- Layer 3 -->
-      <div class="bg-gradient-to-r from-emerald-500 to-teal-400 text-white p-4 rounded-2xl shadow-lg shadow-emerald-500/20 text-center">
-        <div class="font-bold text-lg">💾 データレイヤー</div>
-        <div class="text-sm text-white/80">学習データ・知識ベース</div>
+      <!-- Layer 3（濃い緑→白文字）-->
+      <div class="bg-emerald-600 p-4 rounded-2xl shadow-lg text-center">
+        <div class="font-bold text-lg text-white">💾 データレイヤー</div>
+        <div class="text-sm text-emerald-100">学習データ・知識ベース</div>
       </div>
     </div>
   </div>
@@ -212,99 +238,99 @@ ${JSON.stringify(newsData, null, 2)}
 </div>
 
 ### 【テンプレート3: プロセスフロー型】処理の流れ・ワークフロー用
-<div class="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl p-6">
-  <h4 class="text-center text-lg font-bold text-slate-800 mb-6 flex items-center justify-center gap-2">
-    <span class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white text-sm">⚡</span>
+<div class="bg-slate-100 rounded-3xl p-6">
+  <h4 class="text-center text-lg font-bold text-slate-900 mb-6 flex items-center justify-center gap-2">
+    <span class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-sm">⚡</span>
     処理フロー
   </h4>
   
   <div class="flex items-center justify-between gap-2 flex-wrap">
-    <!-- Step 1 -->
+    <!-- Step 1（白背景→濃い文字）-->
     <div class="flex-1 min-w-[100px]">
-      <div class="bg-white rounded-2xl p-4 shadow-lg shadow-blue-500/10 text-center border-2 border-blue-100">
-        <div class="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center text-white text-xl shadow-lg shadow-blue-500/30">📝</div>
-        <div class="font-bold text-slate-800">入力</div>
-        <div class="text-xs text-slate-500 mt-1">テキスト・画像</div>
+      <div class="bg-white rounded-2xl p-4 shadow-lg text-center border border-slate-200">
+        <div class="w-12 h-12 mx-auto mb-3 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl">📝</div>
+        <div class="font-bold text-slate-900">入力</div>
+        <div class="text-xs text-slate-600 mt-1">テキスト・画像</div>
       </div>
     </div>
     
-    <!-- Arrow -->
-    <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">→</div>
+    <!-- Arrow（濃い背景→白文字）-->
+    <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">→</div>
     
     <!-- Step 2 -->
     <div class="flex-1 min-w-[100px]">
-      <div class="bg-white rounded-2xl p-4 shadow-lg shadow-purple-500/10 text-center border-2 border-purple-100">
-        <div class="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl shadow-lg shadow-purple-500/30">🧠</div>
-        <div class="font-bold text-slate-800">AI分析</div>
-        <div class="text-xs text-slate-500 mt-1">深層学習処理</div>
+      <div class="bg-white rounded-2xl p-4 shadow-lg text-center border border-slate-200">
+        <div class="w-12 h-12 mx-auto mb-3 bg-purple-600 rounded-xl flex items-center justify-center text-white text-xl">🧠</div>
+        <div class="font-bold text-slate-900">AI分析</div>
+        <div class="text-xs text-slate-600 mt-1">深層学習処理</div>
       </div>
     </div>
     
     <!-- Arrow -->
-    <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-purple-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">→</div>
+    <div class="flex-shrink-0 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">→</div>
     
     <!-- Step 3 -->
     <div class="flex-1 min-w-[100px]">
-      <div class="bg-white rounded-2xl p-4 shadow-lg shadow-emerald-500/10 text-center border-2 border-emerald-100">
-        <div class="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center text-white text-xl shadow-lg shadow-emerald-500/30">✨</div>
-        <div class="font-bold text-slate-800">出力</div>
-        <div class="text-xs text-slate-500 mt-1">生成結果</div>
+      <div class="bg-white rounded-2xl p-4 shadow-lg text-center border border-slate-200">
+        <div class="w-12 h-12 mx-auto mb-3 bg-emerald-600 rounded-xl flex items-center justify-center text-white text-xl">✨</div>
+        <div class="font-bold text-slate-900">出力</div>
+        <div class="text-xs text-slate-600 mt-1">生成結果</div>
       </div>
     </div>
   </div>
 </div>
 
 ### 【テンプレート4: Before/After比較型】性能向上・改善用
-<div class="bg-gradient-to-br from-slate-100 to-slate-50 rounded-3xl p-6">
-  <h4 class="text-center text-lg font-bold text-slate-800 mb-6">📊 性能比較</h4>
+<div class="bg-slate-100 rounded-3xl p-6">
+  <h4 class="text-center text-lg font-bold text-slate-900 mb-6">📊 性能比較</h4>
   
   <div class="grid grid-cols-2 gap-4">
-    <!-- Before -->
+    <!-- Before（薄いピンク背景→濃い赤文字）-->
     <div class="relative">
-      <div class="absolute -top-3 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">BEFORE</div>
-      <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-5 pt-6 border-2 border-red-200">
+      <div class="absolute -top-3 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">BEFORE</div>
+      <div class="bg-red-50 rounded-2xl p-5 pt-6 border-2 border-red-200">
         <div class="text-center">
-          <div class="text-4xl font-black text-red-500 mb-1">10秒</div>
-          <div class="text-sm text-slate-600">処理時間</div>
+          <div class="text-4xl font-black text-red-700 mb-1">10秒</div>
+          <div class="text-sm text-slate-700">処理時間</div>
         </div>
         <div class="mt-4 space-y-2">
           <div class="flex justify-between text-sm">
-            <span class="text-slate-600">精度</span>
-            <span class="font-bold text-red-500">75%</span>
+            <span class="text-slate-700">精度</span>
+            <span class="font-bold text-red-700">75%</span>
           </div>
           <div class="flex justify-between text-sm">
-            <span class="text-slate-600">コスト</span>
-            <span class="font-bold text-red-500">$100</span>
+            <span class="text-slate-700">コスト</span>
+            <span class="font-bold text-red-700">$100</span>
           </div>
         </div>
       </div>
     </div>
     
-    <!-- After -->
+    <!-- After（薄い緑背景→濃い緑文字）-->
     <div class="relative">
-      <div class="absolute -top-3 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">AFTER</div>
-      <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-5 pt-6 border-2 border-emerald-200 shadow-lg shadow-emerald-500/10">
+      <div class="absolute -top-3 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">AFTER</div>
+      <div class="bg-emerald-50 rounded-2xl p-5 pt-6 border-2 border-emerald-200 shadow-lg">
         <div class="text-center">
-          <div class="text-4xl font-black text-emerald-500 mb-1">1秒</div>
-          <div class="text-sm text-slate-600">処理時間</div>
+          <div class="text-4xl font-black text-emerald-700 mb-1">1秒</div>
+          <div class="text-sm text-slate-700">処理時間</div>
         </div>
         <div class="mt-4 space-y-2">
           <div class="flex justify-between text-sm">
-            <span class="text-slate-600">精度</span>
-            <span class="font-bold text-emerald-500">95%</span>
+            <span class="text-slate-700">精度</span>
+            <span class="font-bold text-emerald-700">95%</span>
           </div>
           <div class="flex justify-between text-sm">
-            <span class="text-slate-600">コスト</span>
-            <span class="font-bold text-emerald-500">$10</span>
+            <span class="text-slate-700">コスト</span>
+            <span class="font-bold text-emerald-700">$10</span>
           </div>
         </div>
       </div>
     </div>
   </div>
   
-  <!-- 改善ハイライト -->
-  <div class="mt-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-4 text-white text-center">
-    <span class="text-2xl font-black">🚀 10倍高速化 & 90%コスト削減</span>
+  <!-- 改善ハイライト（濃い緑背景→白文字）-->
+  <div class="mt-4 bg-emerald-600 rounded-2xl p-4 text-center">
+    <span class="text-2xl font-black text-white">🚀 10倍高速化 & 90%コスト削減</span>
   </div>
 </div>
 
