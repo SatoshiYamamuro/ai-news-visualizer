@@ -316,45 +316,122 @@ html {
    🛡️ Contrast Failsafe - 図解の視認性保証
    ============================================ */
 
-/* 図解コンテナ内のデフォルト文字色を濃くする */
-[dangerouslySetInnerHTML] > div,
+/* 図解コンテナの基本設定 */
 .visual-container {
-  color: #1e293b; /* slate-800 - デフォルトで濃い文字 */
+  background: white !important;
+  color: #0f172a !important; /* slate-900 - 確実に濃い文字 */
 }
 
-/* 濃い背景クラスには白文字を強制 */
-[class*="bg-slate-800"],
-[class*="bg-slate-900"],
-[class*="bg-gray-800"],
-[class*="bg-gray-900"],
-[class*="bg-indigo-600"],
-[class*="bg-indigo-700"],
-[class*="bg-indigo-800"],
-[class*="bg-indigo-900"],
-[class*="bg-purple-600"],
-[class*="bg-purple-700"],
-[class*="bg-purple-800"],
-[class*="bg-purple-900"],
-[class*="bg-blue-600"],
-[class*="bg-blue-700"],
-[class*="bg-blue-800"],
-[class*="bg-emerald-600"],
-[class*="bg-emerald-700"],
-[class*="bg-red-600"],
-[class*="bg-red-700"] {
-  color: white;
+/* 図解内の全テキスト要素にデフォルト色を適用 */
+.visual-container * {
+  color: inherit;
 }
 
-/* 薄い背景クラスには濃い文字を強制 */
-[class*="bg-white"],
-[class*="bg-slate-50"],
-[class*="bg-slate-100"],
-[class*="bg-gray-50"],
-[class*="bg-gray-100"],
-[class*="bg-blue-50"],
-[class*="bg-indigo-50"],
-[class*="bg-purple-50"],
-[class*="bg-emerald-50"],
-[class*="bg-red-50"] {
-  color: #1e293b; /* slate-800 */
+/* ===== 濃い背景には白文字を強制 ===== */
+.visual-container [class*="bg-slate-800"],
+.visual-container [class*="bg-slate-900"],
+.visual-container [class*="bg-gray-800"],
+.visual-container [class*="bg-gray-900"],
+.visual-container [class*="bg-indigo-600"],
+.visual-container [class*="bg-indigo-700"],
+.visual-container [class*="bg-indigo-800"],
+.visual-container [class*="bg-indigo-900"],
+.visual-container [class*="bg-purple-600"],
+.visual-container [class*="bg-purple-700"],
+.visual-container [class*="bg-purple-800"],
+.visual-container [class*="bg-purple-900"],
+.visual-container [class*="bg-blue-600"],
+.visual-container [class*="bg-blue-700"],
+.visual-container [class*="bg-blue-800"],
+.visual-container [class*="bg-emerald-600"],
+.visual-container [class*="bg-emerald-700"],
+.visual-container [class*="bg-red-600"],
+.visual-container [class*="bg-red-700"],
+.visual-container [class*="bg-pink-600"],
+.visual-container [class*="bg-pink-700"],
+.visual-container [class*="bg-cyan-600"],
+.visual-container [class*="bg-cyan-700"],
+.visual-container [class*="bg-teal-600"],
+.visual-container [class*="bg-teal-700"],
+.visual-container [class*="from-indigo-600"],
+.visual-container [class*="from-indigo-700"],
+.visual-container [class*="from-purple-600"],
+.visual-container [class*="from-purple-700"],
+.visual-container [class*="from-blue-600"],
+.visual-container [class*="from-slate-800"],
+.visual-container [class*="from-slate-900"] {
+  color: white !important;
+}
+
+/* 濃い背景内の子要素も白文字 */
+.visual-container [class*="bg-slate-800"] *,
+.visual-container [class*="bg-slate-900"] *,
+.visual-container [class*="bg-indigo-600"] *,
+.visual-container [class*="bg-indigo-700"] *,
+.visual-container [class*="bg-purple-600"] *,
+.visual-container [class*="bg-purple-700"] *,
+.visual-container [class*="bg-blue-600"] *,
+.visual-container [class*="bg-blue-700"] *,
+.visual-container [class*="bg-emerald-600"] *,
+.visual-container [class*="bg-red-600"] *,
+.visual-container [class*="from-indigo-600"] *,
+.visual-container [class*="from-purple-600"] *,
+.visual-container [class*="from-slate-800"] *,
+.visual-container [class*="from-slate-900"] * {
+  color: white !important;
+}
+
+/* ===== 薄い背景には濃い文字を強制 ===== */
+.visual-container [class*="bg-white"],
+.visual-container [class*="bg-slate-50"],
+.visual-container [class*="bg-slate-100"],
+.visual-container [class*="bg-gray-50"],
+.visual-container [class*="bg-gray-100"],
+.visual-container [class*="bg-blue-50"],
+.visual-container [class*="bg-indigo-50"],
+.visual-container [class*="bg-purple-50"],
+.visual-container [class*="bg-emerald-50"],
+.visual-container [class*="bg-red-50"],
+.visual-container [class*="from-white"],
+.visual-container [class*="from-slate-50"],
+.visual-container [class*="from-slate-100"] {
+  color: #0f172a !important; /* slate-900 */
+}
+
+/* 薄い背景内の子要素も濃い文字 */
+.visual-container [class*="bg-white"] *,
+.visual-container [class*="bg-slate-50"] *,
+.visual-container [class*="bg-slate-100"] *,
+.visual-container [class*="bg-gray-50"] *,
+.visual-container [class*="bg-blue-50"] *,
+.visual-container [class*="bg-indigo-50"] *,
+.visual-container [class*="bg-purple-50"] *,
+.visual-container [class*="bg-emerald-50"] *,
+.visual-container [class*="from-white"] *,
+.visual-container [class*="from-slate-50"] * {
+  color: #0f172a !important;
+}
+
+/* ===== 明示的なtext-*クラスは尊重する ===== */
+.visual-container [class*="text-white"] {
+  color: white !important;
+}
+.visual-container [class*="text-slate-900"],
+.visual-container [class*="text-slate-800"],
+.visual-container [class*="text-gray-900"],
+.visual-container [class*="text-gray-800"] {
+  color: #0f172a !important;
+}
+.visual-container [class*="text-indigo-100"],
+.visual-container [class*="text-indigo-200"],
+.visual-container [class*="text-purple-100"],
+.visual-container [class*="text-purple-200"],
+.visual-container [class*="text-blue-100"],
+.visual-container [class*="text-blue-200"],
+.visual-container [class*="text-emerald-100"],
+.visual-container [class*="text-emerald-200"],
+.visual-container [class*="text-slate-100"],
+.visual-container [class*="text-slate-200"],
+.visual-container [class*="text-slate-300"] {
+  color: rgba(255, 255, 255, 0.85) !important;
 }

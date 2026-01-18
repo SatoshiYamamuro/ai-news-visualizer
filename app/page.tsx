@@ -250,9 +250,9 @@ function NewsCard({ newsItem, index }: { newsItem: NewsItem; index: number }) {
             </h3>
           </div>
           
-          {/* 図解コンテンツ */}
+          {/* 図解コンテンツ - 常にライトモードで表示（コントラスト保証）*/}
           <div 
-            className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-4 md:p-6 border border-slate-200 dark:border-slate-700 overflow-hidden"
+            className="visual-container bg-white rounded-2xl p-4 md:p-6 border border-slate-200 overflow-hidden text-slate-900"
             dangerouslySetInnerHTML={{ __html: newsItem.visualHtml }}
           />
         </div>
