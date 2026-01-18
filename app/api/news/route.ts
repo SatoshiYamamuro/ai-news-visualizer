@@ -13,10 +13,9 @@ export async function GET() {
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
     
-    // Google Search Grounding を有効にしたモデル
+    // Gemini 2.5 Flash モデルを使用
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
-      tools: [{ googleSearch: {} }],
     });
 
     const today = new Date();
