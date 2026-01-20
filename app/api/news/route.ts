@@ -382,36 +382,84 @@ ${JSON.stringify(newsData, null, 2)}
 }
 `;
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text();
+    // リトライロジック（503エラー対策）
+    const maxRetries = 3;
+    let lastError: Error | null = null;
     
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      console.error("JSONが見つかりません:", text);
-      return NextResponse.json(
-        { error: "AIからの応答を解析できませんでした" },
-        { status: 500 }
-      );
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        if (attempt > 0) {
+          // 指数バックオフ: 2秒、4秒、8秒
+          const delay = Math.pow(2, attempt) * 1000;
+          console.log(`リトライ ${attempt}/${maxRetries - 1} - ${delay}ms待機...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+        
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) {
+          console.error("JSONが見つかりません:", text);
+          return NextResponse.json(
+            { error: "AIからの応答を解析できませんでした" },
+            { status: 500 }
+          );
+        }
+
+        const aiResults = JSON.parse(jsonMatch[0]);
+        
+        // 実際のニュースデータとAI生成データを結合
+        const finalNews = newsData.map((news, index) => {
+          const aiResult = aiResults.results?.find((r: { index: number }) => r.index === index + 1) || {};
+          return {
+            title: aiResult.titleJa || news.title, // 日本語タイトルを優先
+            publishedAt: news.publishedAt,
+            source: news.source.replace(" AI", ""),
+            summary: aiResult.summary || "要約を生成できませんでした",
+            url: news.url,
+            visualHtml: aiResult.visualHtml || "<div class='p-4 bg-gray-100 rounded'>図解を生成できませんでした</div>",
+          };
+        });
+
+        return NextResponse.json({ news: finalNews });
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error(String(error));
+        const errorMessage = lastError.message;
+        
+        // 503エラー（過負荷）の場合はリトライ
+        if (errorMessage.includes("503") || errorMessage.includes("overloaded")) {
+          console.warn(`試行 ${attempt + 1}/${maxRetries} 失敗: ${errorMessage}`);
+          if (attempt < maxRetries - 1) {
+            continue; // リトライ
+          }
+        }
+        
+        // 503以外のエラー、またはリトライ上限到達
+        console.error("APIエラー:", error);
+        return NextResponse.json(
+          { 
+            error: errorMessage.includes("503") || errorMessage.includes("overloaded")
+              ? "Gemini APIが過負荷です。しばらく待ってから再試行してください。"
+              : "生成に失敗しました",
+            details: errorMessage,
+            retryable: errorMessage.includes("503") || errorMessage.includes("overloaded")
+          },
+          { status: 503 }
+        );
+      }
     }
-
-    const aiResults = JSON.parse(jsonMatch[0]);
     
-    // 実際のニュースデータとAI生成データを結合
-    const finalNews = newsData.map((news, index) => {
-      const aiResult = aiResults.results?.find((r: { index: number }) => r.index === index + 1) || {};
-      return {
-        title: aiResult.titleJa || news.title, // 日本語タイトルを優先
-        publishedAt: news.publishedAt,
-        source: news.source.replace(" AI", ""),
-        summary: aiResult.summary || "要約を生成できませんでした",
-        url: news.url,
-        visualHtml: aiResult.visualHtml || "<div class='p-4 bg-gray-100 rounded'>図解を生成できませんでした</div>",
-      };
-    });
-
-    return NextResponse.json({ news: finalNews });
+    // ここには到達しないはずだが、念のため
+    return NextResponse.json(
+      { 
+        error: "生成に失敗しました（リトライ上限に達しました）",
+        details: lastError?.message || "不明なエラー"
+      },
+      { status: 500 }
+    );
   } catch (error) {
-    console.error("APIエラー:", error);
+    console.error("予期しないエラー:", error);
     const errorMessage = error instanceof Error ? error.message : "不明なエラー";
     return NextResponse.json(
       { error: "生成に失敗しました", details: errorMessage },

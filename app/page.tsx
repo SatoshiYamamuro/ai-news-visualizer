@@ -18,11 +18,13 @@ export default function Home() {
       if (!response.ok) {
         const errorMsg = data.error || "ニュースの取得に失敗しました";
         const details = data.details ? `\n詳細: ${data.details}` : "";
-        throw new Error(`${errorMsg}${details}`);
+        const isRetryable = response.status === 503 || data.retryable;
+        throw new Error(`${errorMsg}${details}${isRetryable ? '\n\n（サーバー側で自動リトライ中です。しばらく待ってから再度お試しください）' : ''}`);
       }
       
       if (data.error) {
-        throw new Error(data.error + (data.details ? `\n詳細: ${data.details}` : ""));
+        const isRetryable = data.retryable;
+        throw new Error(data.error + (data.details ? `\n詳細: ${data.details}` : "") + (isRetryable ? '\n\n（サーバー側で自動リトライ中です。しばらく待ってから再度お試しください）' : ''));
       }
       
       setNews(data.news || []);
@@ -93,14 +95,33 @@ export default function Home() {
         {/* エラー表示 */}
         {error && (
           <div className="mb-8 animate-fade-in">
-            <div className="glass-card p-6 border-l-4 border-red-500">
+            <div className={`glass-card p-6 border-l-4 ${error.includes("503") || error.includes("過負荷") ? "border-orange-500" : "border-red-500"}`}>
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">⚠️</span>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                  error.includes("503") || error.includes("過負荷")
+                    ? "bg-orange-100 dark:bg-orange-900/30"
+                    : "bg-red-100 dark:bg-red-900/30"
+                }`}>
+                  <span className="text-xl">{error.includes("503") || error.includes("過負荷") ? "⏳" : "⚠️"}</span>
                 </div>
-                <div>
-                  <h3 className="font-bold text-red-600 dark:text-red-400 mb-1">エラーが発生しました</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">{error}</p>
+                <div className="flex-1">
+                  <h3 className={`font-bold mb-1 ${
+                    error.includes("503") || error.includes("過負荷")
+                      ? "text-orange-600 dark:text-orange-400"
+                      : "text-red-600 dark:text-red-400"
+                  }`}>
+                    {error.includes("503") || error.includes("過負荷") ? "サーバーが混雑しています" : "エラーが発生しました"}
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line mb-4">{error}</p>
+                  {(error.includes("503") || error.includes("過負荷")) && (
+                    <button
+                      onClick={fetchNews}
+                      disabled={loading}
+                      className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      {loading ? "再試行中..." : "🔄 再試行する"}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
