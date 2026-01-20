@@ -112,56 +112,57 @@ ${JSON.stringify(newsData, null, 2)}
 
 ## 🎨 デザイン哲学（絶対遵守）
 
-### 禁止事項
+### 🚫 絶対禁止事項（これらを犯すと図解が読めなくなる）
+
 ❌ 単純なborderで囲った四角形
 ❌ 「→」という文字だけの矢印
 ❌ 均一なフォントサイズ
 ❌ 余白のない詰め込みデザイン
 ❌ 単色の平坦な背景
-❌❌❌ 白背景に白文字（絶対禁止！読めなくなる）
-❌❌❌ 薄い背景に薄い文字（コントラスト不足は致命的）
+❌❌❌ **bg-white（白背景）の使用を完全禁止**
+❌❌❌ **bg-slate-50, bg-gray-50 などの薄い背景の使用を完全禁止**
+❌❌❌ **白背景に白文字（絶対禁止！読めなくなる）**
+❌❌❌ **薄い背景に薄い文字（コントラスト不足は致命的）**
 
-### 必須要素
-✅ グラデーション背景（bg-gradient-to-br from-X to-Y）
+### ✅ 必須要素
+
+✅ **濃い背景のみ使用**（bg-slate-800以上、bg-indigo-600以上など）
+✅ **白文字のみ使用**（text-white）
+✅ グラデーション背景（bg-gradient-to-br from-X-600 to-Y-600 など濃い色同士）
 ✅ 柔らかい角丸（rounded-2xl, rounded-3xl）
 ✅ 影による奥行き（shadow-lg, shadow-xl）
 ✅ 情報の階層化（ヒーロー数字は text-5xl font-black）
 ✅ 十分な余白（p-6以上、gap-4以上）
-✅ 高コントラスト配色（暗い背景→白文字、明るい背景→濃い文字）
 
-### ⚠️ 配色ルール（これ以外の組み合わせは禁止）
+### ⚠️ 配色ルール（これ以外は一切使用禁止）
 
-【許可される配色パターン - 必ずこの中から選ぶこと】
+【唯一許可される配色パターン】
 
-■ パターンA: ダーク背景（高級感・重厚感）
+■ **パターン1: ダーク背景 + 白文字（推奨）**
 背景: bg-slate-800, bg-slate-900, bg-gray-800, bg-gray-900
-文字: text-white（メイン）, text-slate-200, text-gray-200（サブ）
-
-■ パターンB: カラー背景（アクセント・強調）
-背景: bg-blue-600, bg-indigo-600, bg-purple-600, bg-emerald-600, bg-rose-600
 文字: text-white（必須）
 
-■ パターンC: ライト背景（清潔感・読みやすさ）
-背景: bg-white, bg-slate-50, bg-gray-50, bg-slate-100
-文字: text-slate-800, text-slate-900, text-gray-800, text-gray-900
-
-■ パターンD: パステル背景（柔らかさ）
-背景: bg-blue-50, bg-indigo-50, bg-purple-50, bg-emerald-50
-文字: text-blue-900, text-indigo-900, text-purple-900, text-emerald-900
-
-■ パターンE: グラデーション背景
-背景: bg-gradient-to-r from-blue-600 to-indigo-600（濃い色同士）
+■ **パターン2: カラー背景 + 白文字（推奨）**
+背景: bg-blue-600, bg-indigo-600, bg-purple-600, bg-emerald-600, bg-rose-600, bg-pink-600, bg-cyan-600, bg-teal-600
 文字: text-white（必須）
 
-背景: bg-gradient-to-br from-slate-50 to-blue-50（薄い色同士）
-文字: text-slate-800, text-slate-900
+■ **パターン3: 濃いグラデーション背景 + 白文字（推奨）**
+背景: bg-gradient-to-r from-blue-600 to-indigo-600
+背景: bg-gradient-to-br from-indigo-700 to-purple-700
+背景: bg-gradient-to-r from-slate-800 to-slate-900
+文字: text-white（必須）
 
-【絶対禁止の組み合わせ】
-❌ bg-white + text-white
-❌ bg-slate-50 + text-slate-100（薄い×薄い）
-❌ bg-slate-800 + text-slate-700（濃い×濃い）
-❌ bg-blue-500 + text-blue-600（同系色）
-❌ 背景と文字の明度が近い組み合わせすべて
+【完全禁止】
+❌ bg-white（白背景）→ 絶対に使わない
+❌ bg-slate-50, bg-gray-50（薄い背景）→ 絶対に使わない
+❌ bg-slate-100, bg-gray-100（薄い背景）→ 絶対に使わない
+❌ text-slate-800, text-gray-900（濃い文字）→ 白背景でない限り使わない
+❌ 背景が600未満の色（bg-blue-500, bg-indigo-400など）→ 使わない
+
+【重要】
+- すべての背景は必ず「600以上」または「slate-800以上」の濃い色を使用すること
+- すべての文字は必ず「text-white」を使用すること
+- 白や薄い背景は一切使わないこと
 
 ## 📐 テンプレート集（これを基に創造的にアレンジせよ）
 
@@ -176,8 +177,8 @@ ${JSON.stringify(newsData, null, 2)}
     <p class="text-indigo-100 text-sm">新技術の構造を視覚化</p>
   </div>
   
-  <!-- メインコンテンツ（薄い背景→濃い文字）-->
-  <div class="bg-slate-100 p-6 rounded-b-3xl">
+  <!-- メインコンテンツ（濃い背景）-->
+  <div class="bg-slate-800 p-6 rounded-b-3xl">
     <div class="space-y-3">
       <!-- Layer 1（濃い青→白文字）-->
       <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-center">
@@ -186,7 +187,7 @@ ${JSON.stringify(newsData, null, 2)}
       </div>
       
       <div class="flex justify-center">
-        <div class="w-1 h-6 bg-purple-400 rounded-full"></div>
+        <div class="w-1 h-6 bg-purple-500 rounded-full"></div>
       </div>
       
       <!-- Layer 2（濃い紫→白文字）-->
@@ -196,7 +197,7 @@ ${JSON.stringify(newsData, null, 2)}
       </div>
       
       <div class="flex justify-center">
-        <div class="w-1 h-6 bg-emerald-400 rounded-full"></div>
+        <div class="w-1 h-6 bg-emerald-500 rounded-full"></div>
       </div>
       
       <!-- Layer 3（濃い緑→白文字）-->
@@ -238,90 +239,90 @@ ${JSON.stringify(newsData, null, 2)}
 </div>
 
 ### 【テンプレート3: プロセスフロー型】処理の流れ・ワークフロー用
-<div class="bg-slate-100 rounded-3xl p-6">
-  <h4 class="text-center text-lg font-bold text-slate-900 mb-6 flex items-center justify-center gap-2">
+<div class="bg-slate-800 rounded-3xl p-6">
+  <h4 class="text-center text-lg font-bold text-white mb-6 flex items-center justify-center gap-2">
     <span class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-sm">⚡</span>
     処理フロー
   </h4>
   
   <div class="flex items-center justify-between gap-2 flex-wrap">
-    <!-- Step 1（白背景→濃い文字）-->
+    <!-- Step 1（濃い青背景→白文字）-->
     <div class="flex-1 min-w-[100px]">
-      <div class="bg-white rounded-2xl p-4 shadow-lg text-center border border-slate-200">
-        <div class="w-12 h-12 mx-auto mb-3 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl">📝</div>
-        <div class="font-bold text-slate-900">入力</div>
-        <div class="text-xs text-slate-600 mt-1">テキスト・画像</div>
+      <div class="bg-blue-600 rounded-2xl p-4 shadow-lg text-center">
+        <div class="w-12 h-12 mx-auto mb-3 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl">📝</div>
+        <div class="font-bold text-white">入力</div>
+        <div class="text-xs text-blue-100 mt-1">テキスト・画像</div>
       </div>
     </div>
     
     <!-- Arrow（濃い背景→白文字）-->
     <div class="flex-shrink-0 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">→</div>
     
-    <!-- Step 2 -->
+    <!-- Step 2（濃い紫背景→白文字）-->
     <div class="flex-1 min-w-[100px]">
-      <div class="bg-white rounded-2xl p-4 shadow-lg text-center border border-slate-200">
-        <div class="w-12 h-12 mx-auto mb-3 bg-purple-600 rounded-xl flex items-center justify-center text-white text-xl">🧠</div>
-        <div class="font-bold text-slate-900">AI分析</div>
-        <div class="text-xs text-slate-600 mt-1">深層学習処理</div>
+      <div class="bg-purple-600 rounded-2xl p-4 shadow-lg text-center">
+        <div class="w-12 h-12 mx-auto mb-3 bg-purple-500 rounded-xl flex items-center justify-center text-white text-xl">🧠</div>
+        <div class="font-bold text-white">AI分析</div>
+        <div class="text-xs text-purple-100 mt-1">深層学習処理</div>
       </div>
     </div>
     
     <!-- Arrow -->
     <div class="flex-shrink-0 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">→</div>
     
-    <!-- Step 3 -->
+    <!-- Step 3（濃い緑背景→白文字）-->
     <div class="flex-1 min-w-[100px]">
-      <div class="bg-white rounded-2xl p-4 shadow-lg text-center border border-slate-200">
-        <div class="w-12 h-12 mx-auto mb-3 bg-emerald-600 rounded-xl flex items-center justify-center text-white text-xl">✨</div>
-        <div class="font-bold text-slate-900">出力</div>
-        <div class="text-xs text-slate-600 mt-1">生成結果</div>
+      <div class="bg-emerald-600 rounded-2xl p-4 shadow-lg text-center">
+        <div class="w-12 h-12 mx-auto mb-3 bg-emerald-500 rounded-xl flex items-center justify-center text-white text-xl">✨</div>
+        <div class="font-bold text-white">出力</div>
+        <div class="text-xs text-emerald-100 mt-1">生成結果</div>
       </div>
     </div>
   </div>
 </div>
 
 ### 【テンプレート4: Before/After比較型】性能向上・改善用
-<div class="bg-slate-100 rounded-3xl p-6">
-  <h4 class="text-center text-lg font-bold text-slate-900 mb-6">📊 性能比較</h4>
+<div class="bg-slate-800 rounded-3xl p-6">
+  <h4 class="text-center text-lg font-bold text-white mb-6">📊 性能比較</h4>
   
   <div class="grid grid-cols-2 gap-4">
-    <!-- Before（薄いピンク背景→濃い赤文字）-->
+    <!-- Before（濃い赤背景→白文字）-->
     <div class="relative">
-      <div class="absolute -top-3 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">BEFORE</div>
-      <div class="bg-red-50 rounded-2xl p-5 pt-6 border-2 border-red-200">
+      <div class="absolute -top-3 left-4 bg-red-700 text-white text-xs font-bold px-3 py-1 rounded-full z-10">BEFORE</div>
+      <div class="bg-red-600 rounded-2xl p-5 pt-6">
         <div class="text-center">
-          <div class="text-4xl font-black text-red-700 mb-1">10秒</div>
-          <div class="text-sm text-slate-700">処理時間</div>
+          <div class="text-4xl font-black text-white mb-1">10秒</div>
+          <div class="text-sm text-red-100">処理時間</div>
         </div>
         <div class="mt-4 space-y-2">
           <div class="flex justify-between text-sm">
-            <span class="text-slate-700">精度</span>
-            <span class="font-bold text-red-700">75%</span>
+            <span class="text-red-100">精度</span>
+            <span class="font-bold text-white">75%</span>
           </div>
           <div class="flex justify-between text-sm">
-            <span class="text-slate-700">コスト</span>
-            <span class="font-bold text-red-700">$100</span>
+            <span class="text-red-100">コスト</span>
+            <span class="font-bold text-white">$100</span>
           </div>
         </div>
       </div>
     </div>
     
-    <!-- After（薄い緑背景→濃い緑文字）-->
+    <!-- After（濃い緑背景→白文字）-->
     <div class="relative">
-      <div class="absolute -top-3 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">AFTER</div>
-      <div class="bg-emerald-50 rounded-2xl p-5 pt-6 border-2 border-emerald-200 shadow-lg">
+      <div class="absolute -top-3 left-4 bg-emerald-700 text-white text-xs font-bold px-3 py-1 rounded-full z-10">AFTER</div>
+      <div class="bg-emerald-600 rounded-2xl p-5 pt-6 shadow-lg">
         <div class="text-center">
-          <div class="text-4xl font-black text-emerald-700 mb-1">1秒</div>
-          <div class="text-sm text-slate-700">処理時間</div>
+          <div class="text-4xl font-black text-white mb-1">1秒</div>
+          <div class="text-sm text-emerald-100">処理時間</div>
         </div>
         <div class="mt-4 space-y-2">
           <div class="flex justify-between text-sm">
-            <span class="text-slate-700">精度</span>
-            <span class="font-bold text-emerald-700">95%</span>
+            <span class="text-emerald-100">精度</span>
+            <span class="font-bold text-white">95%</span>
           </div>
           <div class="flex justify-between text-sm">
-            <span class="text-slate-700">コスト</span>
-            <span class="font-bold text-emerald-700">$10</span>
+            <span class="text-emerald-100">コスト</span>
+            <span class="font-bold text-white">$10</span>
           </div>
         </div>
       </div>
@@ -368,6 +369,18 @@ ${JSON.stringify(newsData, null, 2)}
   </div>
 </div>
 
+## ⚠️⚠️⚠️ 最終警告：配色について ⚠️⚠️⚠️
+
+visualHtmlを生成する際、以下のルールを絶対に守ること：
+
+1. **bg-white（白背景）は絶対に使わない**
+2. **bg-slate-50, bg-gray-50 などの薄い背景は絶対に使わない**
+3. **すべての背景は必ず濃い色（bg-slate-800以上、bg-indigo-600以上）を使用**
+4. **すべての文字は必ず text-white（白文字）を使用**
+5. **白背景に白文字、黒背景に黒文字は絶対に生成しない**
+
+上記テンプレートを参考に、必ず濃い背景 + 白文字の組み合わせでHTMLを生成すること。
+
 ## 出力形式
 以下のJSON形式のみを出力（説明文は一切不要）：
 {
@@ -376,7 +389,7 @@ ${JSON.stringify(newsData, null, 2)}
       "index": 1,
       "titleJa": "日本語に翻訳したニュースタイトル",
       "summary": "日本語の詳細要約（300-400文字）",
-      "visualHtml": "上記テンプレートを参考に、高コントラストで見やすい美しいHTML"
+      "visualHtml": "上記テンプレートを参考に、濃い背景（bg-slate-800以上、bg-indigo-600以上）+ 白文字（text-white）のみを使用した美しいHTML"
     }
   ]
 }
